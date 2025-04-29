@@ -404,3 +404,8 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/vs,macos,linux
+
+# API keys
+.env
+.env.local
+.env.development
