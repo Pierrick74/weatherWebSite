@@ -58,6 +58,14 @@ h2{
     color: #333;
 }
 
+.button{
+    background-color: #1500d1;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 20px;
+}
+
 
 @media (min-width: 500px) {
     .card{

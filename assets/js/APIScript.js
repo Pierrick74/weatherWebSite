@@ -24,8 +24,9 @@ async function fetchWeatherData(city) {
 
     try {
         const response = await fetch(url, options);
-    const result = await response.json();
+        const result = await response.json();
         console.log("Weather API response:", result);
+        return result;
     } catch (error) {
         console.error("Error fetching weather data:", error);
     }

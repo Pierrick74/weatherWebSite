@@ -67,3 +67,5 @@ async function displayInfo() {
 }
 
 displayInfo();
+
+document.getElementById("submit").addEventListener("click", displayInfo);
