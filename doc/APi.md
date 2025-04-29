@@ -90,6 +90,7 @@ utilisation d'un plan gratuit
 ## Exemple
 ```javascript
 const url = "https://api.weatherstack.com/current?access_key={PASTE_YOUR_API_KEY_HERE}&query=Annecy";
+
 const options = {
     method: "GET",
 };
