@@ -1,0 +1,30 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f6f6f7;
+    margin: 0;
+    padding: 20px;
+}
+
+h1{
+    font-size: 2em;
+    color: #1500d1;
+    margin: 0;
+}
+
+h2{
+    font-size: 1em;
+    color: #645da0;
+    margin: 0;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-direction: column;
+    margin: 10px;
+    
+}
+
+
+
