@@ -3,5 +3,13 @@ document.getElementById("Menu").addEventListener("click", updateMenu);
 
 function updateMenu() {
     var MenuContent = document.getElementById("menuContent");
-    MenuContent.style.display = (MenuContent.style.display === "none") ? "flex" : "none";
+    hidden(MenuContent);
+}
+
+function hidden(element) {
+    if (element.classList.contains("hidden")) {
+        element.classList.remove("hidden");
+    } else {
+        element.classList.add("hidden");
+    }
 }
