@@ -90,3 +90,4 @@ function resetData() {
 displayInfo();
 
 document.getElementById("submit").addEventListener("click", displayInfo);
+
