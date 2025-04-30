@@ -9,24 +9,27 @@
 <body>
     <header class="header">
         <span>
-        <h1>Weather Resort</h1>
-        <h2>L'outil indispensable de vos vacances</h2>
-    </span>
-    <div class="menu">
-        <button class="button" id="Menu">Menu</button>
-        <div id="menuContent" class="menu-content" style="display: none;">
-            <a class="button-menu" id="home" href="#header">Feed</a>
-            <a class="button-menu" id="weather">Gallery</a>
-            <a class="button-menu" id="news">Jeux</a>
+            <h1>Weather Resort</h1>
+            <h2>L'outil indispensable de vos vacances</h2>
+        </span>
+        <div class="menu">
+            <button class="button-menu-head" id="Menu">Menu</button>
+            <div id="menuContent" class="menu-content" style="display: none;">
+                <a class="button-menu" id="home" href="#header">Feed</a>
+                <a class="button-menu" id="weather">Gallery</a>
+                <a class="button-menu" id="news">Jeux</a>
+            </div>
         </div>
-    </div>
     </header>
+    <div class="input-area">
+    <input type="text" id="name" name="name"/>
+    <button class="button" id="send-city">send-city</button>
     <button class="button" id="submit">Update</button>
- <section id="Feed" class="feed">
-
- </section>
- <script src="assets/js/APIScript.js" type="module"></script>
- <script src="assets/js/feedScript.js" type="module"></script>
- <script src="assets/js/menu.js" type="module"></script>
+</div>
+    <section id="Feed" class="feed">
+    </section>
+    <script src="assets/js/APIScript.js" type="module"></script>
+    <script src="assets/js/feedScript.js" type="module"></script>
+    <script src="assets/js/menu.js" type="module"></script>
 </body>
 </html>
