@@ -1,9 +1,9 @@
-import { getweatherData } from "./APIScript.js";
+import { getweatherData, getCityCoordinate } from "./APIScript.js";
 
 let datas = [];
 
 // create a fonction to create data with list of city
-const cityList = [
+let cityList = [
     {"lat":"45,899930",
         "lon": "6,12874",
     },
@@ -91,3 +91,21 @@ displayInfo();
 
 document.getElementById("submit").addEventListener("click", displayInfo);
 
+//-------------input ------------------------
+document.getElementById("send-city").addEventListener("click", addCity);
+
+async function addCity() {
+    const input = document.getElementById("name").value;
+    
+    try {
+        let city = await getCityCoordinate(input)
+        cityList.push(
+            {"lat":city.lat,
+            "lon": city.lon
+        });
+        displayInfo();
+
+    } catch (error) {
+        console.error(`Erreur lors de la récupération des données pour ${city}:`, error);
+    }
+}

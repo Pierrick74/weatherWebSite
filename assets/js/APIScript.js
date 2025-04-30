@@ -4,7 +4,7 @@ import jsonDatasCity from "./mockCityData.js";
 
 console.log(jsonDatas);
 // script For API
-const isMockActivated = true;
+const isMockActivated = false;
 let mockNumber = 0;
 
 const options = {
