@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Resort</title>
     <link rel="stylesheet" href="assets/css/styleMenu.css">
-    <link rel="stylesheet" href="assets/css/styleFeed.css">
+    <link rel="stylesheet" href="assets/css/styleGallery.css">
     <link rel="stylesheet" href="assets/css/styleCommun.css">
 </head>
 <body>
@@ -17,21 +17,19 @@
         <div class="menu">
             <button class="button-menu-head" id="Menu">Menu</button>
             <div id="menuContent" class="menu-content hidden">
-                <a class="button-menu" id="home" href="#header">Feed</a>
-                <a class="button-menu" id="weather" href="gallery.html">Gallery</a>
+                <a class="button-menu" id="home" href="/index.html">Feed</a>
+                <a class="button-menu" id="weather" href="#header">Gallery</a>
                 <a class="button-menu" id="news">Jeux</a>
             </div>
         </div>
     </header>
-    <div class="input-area">
-    <input type="text" id="name" name="name"/>
-    <button class="button" id="send-city">send-city</button>
-    <button class="button" id="submit">Update</button>
-</div>
-    <section id="Feed" class="feed">
+   <div class="mt-30">
+        <button id="btn-grid"><img src="assets/gallery-grids.jpg" alt="" class="logo"></button>
+        <button id="btn-list"><img src="assets/gallery-list.jpg" alt="" class="logo"></button>
+   </div>
+    <section id="Gallery" class="gallery mt-30">
     </section>
-    <script src="assets/js/APIScript.js" type="module"></script>
-    <script src="assets/js/feedScript.js" type="module"></script>
     <script src="assets/js/menu.js" type="module"></script>
+    <script src="assets/js/gallery.js" type="module"></script>
 </body>
 </html>
