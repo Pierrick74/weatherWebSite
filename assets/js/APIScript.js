@@ -32,11 +32,11 @@ console.log(url);
     }
 }
 
-export function getweatherData(city) {
+export async function getweatherData(city) {
     if (isMockActivated) {
         return getMockData();
     } else {
-        return fetchWeatherData(city.lat, city.lon);
+        return await fetchWeatherData(city.lat, city.lon);
     }
 }
 

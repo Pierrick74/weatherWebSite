@@ -1,28 +1,38 @@
 import { getweatherData } from "./APIScript.js";
 
-let datas = [{
-    title: "Weather in Annecy",
-    temperature: 22,
-    imageUrl: "https://openweathermap.org/img/wn/11d@2x.png",
-}]
+let datas = [];
 
 // create a fonction to create data with list of city
 const cityList = [
     {"lat":"45,899930",
-     "lon": "6,12874",
-    }];
+        "lon": "6,12874",
+    },
+    {"lat":"45,78844",
+        "lon": "6,09840",
+    },
+    {"lat":"45,94261",
+        "lon": "6,42611",
+    },
+    {"lat":"45,90289",
+        "lon": "6,42386",
+    }
+];
 
 async function refreshData() {
-    cityList.forEach(async (city) => {
-        const cityData = await getweatherData(city);
-        console.log("recupere data");
-        console.log(cityData);
-        datas.push({
-            title: cityData.name,
-            temperature: cityData.main.temp,
-            imageUrl: `https://openweathermap.org/img/wn/${cityData.weather[0].icon}@2x.png`,
-        });
-    });
+    for (const city of cityList) {
+        try {
+            const cityData = await getweatherData(city); // Attendre les données pour chaque ville
+            console.log("recupere data");
+            console.log(cityData);
+            datas.push({
+                title: cityData.name,
+                temperature: cityData.main.temp,
+                imageUrl: `https://openweathermap.org/img/wn/${cityData.weather[0].icon}@2x.png`,
+            });
+        } catch (error) {
+            console.error(`Erreur lors de la récupération des données pour ${city}:`, error);
+        }
+    }
     console.log(datas);
 }
 
