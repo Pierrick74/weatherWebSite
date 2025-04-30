@@ -43,3 +43,32 @@ function setList() {
         imgElement.classList.add('w-100');
     });
 }
+
+// ajout gallery_img dans le css
+document.getElementById("btn-ajout").addEventListener("click", addImg);
+
+function addImg() {
+    var reader = new FileReader();
+    const preview = document.querySelector("img");
+    const file = document.querySelector("input[type=file]").files[0];
+    
+    reader.addEventListener(
+        "load",
+        () => {
+            // convert image file to base64 string
+            preview.src = reader.result;
+            const imgElement = document.createElement('img');
+            imgElement.src = preview.src;
+            imgElement.alt = 'Nuage';
+            imgElement.classList.add('gallery_img');
+            gallery.appendChild(imgElement);
+        },
+        false,
+    );
+    
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+    
+    
+}
