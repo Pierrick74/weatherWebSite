@@ -3,11 +3,14 @@ import { getweatherData } from "./APIScript.js";
 let datas = [{
     title: "Weather in Annecy",
     temperature: 22,
-    imageUrl: "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0016_thundery_showers.png",
+    imageUrl: "https://openweathermap.org/img/wn/11d@2x.png",
 }]
 
 // create a fonction to create data with list of city
-const cityList = ["semnoz", "poisy" ];
+const cityList = [
+    {"lat":"45,899930",
+     "lon": "6,12874",
+    }];
 
 async function refreshData() {
     cityList.forEach(async (city) => {
@@ -15,9 +18,9 @@ async function refreshData() {
         console.log("recupere data");
         console.log(cityData);
         datas.push({
-            title: cityData.location.name,
-            temperature: cityData.current.temperature,
-            imageUrl: cityData.current.weather_icons[0],
+            title: cityData.name,
+            temperature: cityData.main.temp,
+            imageUrl: `https://openweathermap.org/img/wn/${cityData.weather[0].icon}@2x.png`,
         });
     });
     console.log(datas);
