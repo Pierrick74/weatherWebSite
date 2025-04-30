@@ -65,6 +65,9 @@ function createCardElement(title, temperature, imageUrl) {
 // create a function to display the data
 function displayData(datas) {
     const cardContainer = document.getElementById("Feed");
+
+    resetData();
+
     datas.forEach((data) => {
         console.log("affiche card");
         console.log(data);
@@ -73,10 +76,15 @@ function displayData(datas) {
     });
 }
 
-
 async function displayInfo() {
     await refreshData();
     displayData(datas);
+}
+
+function resetData() {
+    const cardContainer = document.getElementById("Feed");
+    cardContainer.innerHTML = '';
+    datas = [];
 }
 
 displayInfo();

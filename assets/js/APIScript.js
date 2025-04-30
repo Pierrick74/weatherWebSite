@@ -2,7 +2,7 @@
 import jsonDatas from "./mockData.js";
 console.log(jsonDatas);
 // script For API
-const isMockActivated = false;
+const isMockActivated = true;
 let mockNumber = 0;
 
 const options = {
