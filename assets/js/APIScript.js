@@ -17,11 +17,11 @@ function getMockData() {
     return jsonDatas[mockNumber];
 }
 
-async function fetchWeatherData(city) {
+async function fetchWeatherData(lat, lon) {
 
-    const apiKey = "8a28645e8cf3a1703bd496df0d344610";
-    const url = `https://api.weatherstack.com/current?access_key=${apiKey}&query=${city}`;
-
+    const apiKey = "d1f41b4c764ff93e1f14198b41e24b44";
+    const url =  `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=fr&units=metric`;
+console.log(url);
     try {
         const response = await fetch(url, options);
         const result = await response.json();
@@ -32,11 +32,11 @@ async function fetchWeatherData(city) {
     }
 }
 
-export function getweatherData(city) {
+export async function getweatherData(city) {
     if (isMockActivated) {
         return getMockData();
     } else {
-        return fetchWeatherData(city);
+        return await fetchWeatherData(city.lat, city.lon);
     }
 }
 

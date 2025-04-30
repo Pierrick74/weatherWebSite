@@ -1,25 +1,38 @@
 import { getweatherData } from "./APIScript.js";
 
-let datas = [{
-    title: "Weather in Annecy",
-    temperature: 22,
-    imageUrl: "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0016_thundery_showers.png",
-}]
+let datas = [];
 
 // create a fonction to create data with list of city
-const cityList = ["semnoz", "poisy" ];
+const cityList = [
+    {"lat":"45,899930",
+        "lon": "6,12874",
+    },
+    {"lat":"45,78844",
+        "lon": "6,09840",
+    },
+    {"lat":"45,94261",
+        "lon": "6,42611",
+    },
+    {"lat":"45,90289",
+        "lon": "6,42386",
+    }
+];
 
 async function refreshData() {
-    cityList.forEach(async (city) => {
-        const cityData = await getweatherData(city);
-        console.log("recupere data");
-        console.log(cityData);
-        datas.push({
-            title: cityData.location.name,
-            temperature: cityData.current.temperature,
-            imageUrl: cityData.current.weather_icons[0],
-        });
-    });
+    for (const city of cityList) {
+        try {
+            const cityData = await getweatherData(city); // Attendre les données pour chaque ville
+            console.log("recupere data");
+            console.log(cityData);
+            datas.push({
+                title: cityData.name,
+                temperature: cityData.main.temp,
+                imageUrl: `https://openweathermap.org/img/wn/${cityData.weather[0].icon}@2x.png`,
+            });
+        } catch (error) {
+            console.error(`Erreur lors de la récupération des données pour ${city}:`, error);
+        }
+    }
     console.log(datas);
 }
 
@@ -52,6 +65,9 @@ function createCardElement(title, temperature, imageUrl) {
 // create a function to display the data
 function displayData(datas) {
     const cardContainer = document.getElementById("Feed");
+
+    resetData();
+
     datas.forEach((data) => {
         console.log("affiche card");
         console.log(data);
@@ -60,10 +76,15 @@ function displayData(datas) {
     });
 }
 
-
 async function displayInfo() {
     await refreshData();
     displayData(datas);
+}
+
+function resetData() {
+    const cardContainer = document.getElementById("Feed");
+    cardContainer.innerHTML = '';
+    datas = [];
 }
 
 displayInfo();
