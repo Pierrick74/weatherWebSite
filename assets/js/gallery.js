@@ -44,9 +44,6 @@ function setList() {
     });
 }
 
-// ajout gallery_img dans le css
-document.getElementById("btn-ajout").addEventListener("click", addImg);
-
 function addImg() {
     var reader = new FileReader();
     const preview = document.createElement('img');
@@ -69,3 +66,5 @@ function addImg() {
         reader.readAsDataURL(file);
     }
 }
+
+document.getElementsByClassName("custom-file-input")[0].addEventListener("change", addImg);
