@@ -1,6 +1,7 @@
 const imgName = ['nuage0', 'nuage1', 'nuage2', 'nuage3', 'nuage4', 'nuage5'];
 const gallery = document.getElementById("Gallery");
 let isSelectionActive = false;
+let pubIndex = 0;
 
 function showImg() {
     imgName.forEach((_img) => {
@@ -94,3 +95,26 @@ function delSelectedImg() {
         gallery.removeChild(imgElement);
     });
 }
+
+//-----------------pub----------------
+const pubAvailable = [
+    "assets/img/pub1.png",
+    "assets/img/pub2.png",
+];
+
+function showPub() {
+    pubIndex++;
+    if (pubIndex >= pubAvailable.length) {
+        pubIndex = 0;
+    }
+    const pubElement = document.getElementById("pub-img");
+    pubElement.src = pubAvailable[pubIndex];
+    pubElement.alt = "pub"
+
+    setTimeout(showPub, 5000);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    showPub();
+});
+
