@@ -90,3 +90,17 @@ img {
     border: #d10000 solid 4px;
     box-shadow: 0 0 5px #1500d1;
 }
+
+.pub-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+}
+
+.img-pub {
+    max-height: 200px;
+    aspect-ratio: 1/1;
+    width: auto;
+}
