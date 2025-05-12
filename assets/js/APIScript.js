@@ -1,6 +1,7 @@
 
 import jsonDatas from "./mockData.js";
 import jsonDatasCity from "./mockCityData.js";
+import jsonGameDatas from "./mockGameData.js";
 
 console.log(jsonDatas);
 // script For API
@@ -77,4 +78,13 @@ async function fetchCityPosition(city) {
     } catch (error) {
         console.error("Error fetching weather data:", error);
     }
+}
+
+//----------game----------
+function getMockGameData() {
+    return jsonGameDatas[0];
+}
+
+export function getGameData() {
+    return getMockGameData();
 }
