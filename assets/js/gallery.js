@@ -1,5 +1,6 @@
 const imgName = ['nuage0', 'nuage1', 'nuage2', 'nuage3', 'nuage4', 'nuage5'];
 const gallery = document.getElementById("Gallery");
+let isSelectionActive = false;
 
 function showImg() {
     imgName.forEach((_img) => {
@@ -57,6 +58,15 @@ function addImg() {
             imgElement.src = preview.src;
             imgElement.alt = 'Nuage';
             imgElement.classList.add('gallery_img');
+            imgElement.addEventListener('click', () => {
+                if (isSelectionActive) {
+                    if(imgElement.classList.contains('selected')) {
+                        imgElement.classList.remove('selected');
+                    } else {
+                        imgElement.classList.add('selected');
+                    }
+                }
+            });
             gallery.appendChild(imgElement);
         },
         false,
@@ -68,3 +78,19 @@ function addImg() {
 }
 
 document.getElementsByClassName("custom-file-input")[0].addEventListener("change", addImg);
+
+//----------------delete img----------------
+document.getElementById("selection").addEventListener("click", toggleSelection);
+
+function toggleSelection() {
+    isSelectionActive = !isSelectionActive;
+    document.getElementById("selection").textContent = isSelectionActive ? "delete selection" : "selection";
+    delSelectedImg();
+}
+
+function delSelectedImg() {
+    const imgElements = gallery.querySelectorAll('.selected');
+    imgElements.forEach((imgElement) => {
+        gallery.removeChild(imgElement);
+    });
+}
