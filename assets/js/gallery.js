@@ -49,13 +49,12 @@ document.getElementById("btn-ajout").addEventListener("click", addImg);
 
 function addImg() {
     var reader = new FileReader();
-    const preview = document.querySelector("img");
+    const preview = document.createElement('img');
     const file = document.querySelector("input[type=file]").files[0];
     
     reader.addEventListener(
         "load",
         () => {
-            // convert image file to base64 string
             preview.src = reader.result;
             const imgElement = document.createElement('img');
             imgElement.src = preview.src;
@@ -69,6 +68,4 @@ function addImg() {
     if (file) {
         reader.readAsDataURL(file);
     }
-    
-    
 }
