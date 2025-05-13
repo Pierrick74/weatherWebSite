@@ -5,6 +5,9 @@ let turnNumber = 0;
 let isGameStarted = false;
 let cardDatas = [];
 let currentFlippedIndex = [];
+let menuDifficultySelection = 1;
+
+const gameContainer = document.getElementById("information");
 
 async function startGame() {
     try {
@@ -18,22 +21,11 @@ async function startGame() {
 }
 
 function showInfo() {
-    const gameContainer = document.getElementById("information");
     gameContainer.innerHTML = ""; // Clear previous content
     
-    console.log("Game data:", gameData);
-    const gameName = document.createElement("div");
-    const gameTitle = document.createElement("h3");
-    gameTitle.textContent = gameData.title;
-    
-    const gameDescription = document.createElement("p");
-    gameDescription.textContent = gameData.description;
-    
-    gameName.appendChild(gameTitle);
-    gameName.appendChild(gameDescription);
+    createTitle();
 
-
-    const gameDificulty = setDifficulty(gameData.dificulty);
+    const gameDificulty = createDifficultyMenu();
 
     const gameTurn = document.createElement("p");
     const gameTurnButton = createGameButton();
@@ -45,9 +37,22 @@ function showInfo() {
         gameTurn.appendChild(gameTurnValue);
     }
 
-    gameContainer.appendChild(gameName);
+    
     gameContainer.appendChild(gameDificulty);
     gameContainer.appendChild(gameTurn);
+}
+
+function createTitle() {
+    const gameName = document.createElement("div");
+    const gameTitle = document.createElement("h3");
+    gameTitle.textContent = gameData.title;
+    
+    const gameDescription = document.createElement("p");
+    gameDescription.textContent = gameData.description;
+    
+    gameName.appendChild(gameTitle);
+    gameName.appendChild(gameDescription);
+    gameContainer.appendChild(gameName);
 }
 
 //---------------call api----------------
@@ -59,31 +64,6 @@ async function getGameDatas() {
     }
 }
 
-//---------------difficulty----------------
-function setDifficulty(difficulty) {
-    const gameDificulty = document.createElement("p");
-    gameDificulty.classList.add("gameDifficulty");
-    gameDificulty.textContent = "difficulté ";
-    
-    const gameDifficultyValue = document.createElement("div");
-    for (let i = 0; i < difficulty; i++) {
-        const img = document.createElement("img");
-        img.src = "assets/img/difficulty/stars-fill.jpeg";
-        img.alt = "star";
-        img.classList.add("difficultyStar");
-        gameDifficultyValue.appendChild(img);
-    }
-    for (let i = difficulty; i < 3; i++) {
-        const img = document.createElement("img");
-        img.src = "assets/img/difficulty/stars.png";
-        img.alt = "star";
-        img.classList.add("difficultyStar");
-        gameDifficultyValue.appendChild(img);
-    }
-    
-    gameDificulty.appendChild(gameDifficultyValue);
-    return gameDificulty;
-}
 
 function createGameButton () {
     const gameTurnButton = document.createElement("button");
@@ -207,13 +187,94 @@ function toggleFlippedCardAtIndex(index) {
     }
 }
 
+
+//------------------------start----------------------
 async function startPage() {
   
     if(gameData.length === 0) {
       await getGameDatas()
     } 
-        
     showInfo();
 }
 
 startPage();
+
+//---------------difficulty----------------
+function createDifficultyMenu(){
+    const menu = document.createElement("div");
+    menu.id = "difficultyMenu"
+    for (let i = 1; i < 4; i++) {
+        const element = createDifficultyBoutton(i);
+        element.addEventListener("click", () => setDifficulty(i));
+        element.id = i;
+        menu.appendChild(element);
+    }
+
+    return menu
+}
+
+function showMenu() {
+    for (let i = 1; i < 4; i++) {
+        if (document.getElementById(i).classList.contains("hidden")) {
+            document.getElementById(i).classList.remove("hidden");
+        }
+    }
+}
+
+function setDifficulty(index){
+    if(isMenuIsHidden()){
+        console.log("ici");
+        showMenu();
+    } else {
+        menuDifficultySelection = index;
+        console.log("else");
+        showOnlyMenuIndex(index)
+    }
+}
+
+function showOnlyMenuIndex(index){
+    for (let i = 1; i < 4; i++) {
+        
+        if (i !== menuDifficultySelection) {
+            document.getElementById(i).classList.add("hidden");
+        }
+    }
+}
+
+function isMenuIsHidden() {
+    for (let i = 1; i < 4; i++) {
+        if(document.getElementById(i).classList.contains("hidden")){
+            return true;
+        }
+    }
+    return false;
+}
+
+function createDifficultyBoutton(difficulty) {
+    const gameDificulty = document.createElement("bouton");
+    gameDificulty.classList.add("gameDifficulty");
+    gameDificulty.textContent = "difficulté ";
+
+    gameDificulty.appendChild(createElementWithStars(difficulty));
+    return gameDificulty;
+}
+
+
+function createElementWithStars(index) {
+    const stars = document.createElement("div")
+    for (let i = 0; i < index; i++) {
+        const img = document.createElement("img");
+        img.src = "assets/img/difficulty/stars-fill.jpeg";
+        img.alt = "star";
+        img.classList.add("difficultyStar");
+        stars.appendChild(img);
+    }
+    for (let i = index; i < 3; i++) {
+        const img = document.createElement("img");
+        img.src = "assets/img/difficulty/stars.png";
+        img.alt = "star";
+        img.classList.add("difficultyStar");
+        stars.appendChild(img);
+    }
+    return stars
+}
