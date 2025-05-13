@@ -36,3 +36,7 @@
     display: flex;
     justify-content: center;
 }
+
+.done {
+    background-color: rgba(55, 105, 4, 0.5);
+}

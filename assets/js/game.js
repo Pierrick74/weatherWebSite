@@ -4,8 +4,9 @@ let gameData = [];
 let turnNumber = 0;
 let isGameStarted = false;
 let cardDatas = [];
+let currentFlippedIndex = [];
 
-async function displayGameInformation() {
+async function startGame() {
     try {
         await getGameDatas();
         showInfo();
@@ -15,10 +16,6 @@ async function displayGameInformation() {
         console.error("Error displaying game information:", error);
     }
 }
-
-
-    displayGameInformation();
-
 
 function showInfo() {
     const gameContainer = document.getElementById("information");
@@ -98,11 +95,11 @@ function createGameButton () {
 
 function gameManager() {
     if (isGameStarted) {
-        turnNumber = 0;
     } else {
         isGameStarted = true;
     }
-    displayGameInformation();
+    turnNumber = 0;
+    startGame();
 }
 
 //---------------card----------------
@@ -116,16 +113,17 @@ function createGameDatas() {
     }
     shuffleCards(cardDatas);
     createCards(cardDatas);
+    console.log(cardDatas);
 }
 
 function createCardElements(index) {
-    if (index >= gameData.img.length) {
-        index = index - gameData.pairs;
-    }
+    let imageIndex = (index >= gameData.img.length) ? index - gameData.pairs : index;
+    
     return {
         id: index,
-        imageUrl: gameData.img[index],
+        imageUrl: gameData.img[imageIndex],
         isFlipped: false,
+        isFind: false,
     };
 }
 
@@ -145,13 +143,77 @@ function createCards(cardDatas) {
         img.alt = "card image";
         img.id = cardData.id;
         img.classList.add("card");
-        img.addEventListener("click", () => {
-            cardData.isFlipped = true;
-            turnNumber++;
-            createCards(cardDatas);
-        });
+        if(cardData.isFind){
+            img.classList.add("done");
+        } else {
+            img.addEventListener("click", () => {
+                flippedCard(cardData.id)
+            });
+        }
+
         gameContainer.appendChild(img);
     });
 }
 
+function flippedCard(index) {
+    currentFlippedIndex.push(index);
+    console.log(currentFlippedIndex);
+    
+    const card = cardDatas.find(card => card.id === index);
+    if (card) {
+        card.isFlipped = true;
+    }
+    
+    switch(currentFlippedIndex.length) {
+        case 1:
+        createCards(cardDatas);
+        break;
+        case 2:
+        createCards(cardDatas);
+        setTimeout(checkRules, 700);
+        break;
+    }
+}
 
+function checkRules() {
+    currentFlippedIndex.sort();
+    console.log(currentFlippedIndex);
+    if(currentFlippedIndex[0] + 5 === currentFlippedIndex[1]) {
+        console.log("well done");
+        cardDatas.find(card => card.id === currentFlippedIndex[0]).isFind = true;
+
+        cardDatas.find(card => card.id === currentFlippedIndex[1]).isFind = true;
+   
+        incrementTurn();
+    } else {
+        console.log("looser")
+        toggleFlippedCardAtIndex(currentFlippedIndex[0]);
+        toggleFlippedCardAtIndex(currentFlippedIndex[1]);
+        incrementTurn();
+    }
+    createCards(cardDatas);
+}
+
+function incrementTurn(){
+    currentFlippedIndex = [];
+    turnNumber++;
+    showInfo();
+}
+
+function toggleFlippedCardAtIndex(index) {
+    const card = cardDatas.find(card => card.id === index);
+    if (card) {
+        card.isFlipped = !card.isFlipped;
+    }
+}
+
+async function startPage() {
+  
+    if(gameData.length === 0) {
+      await getGameDatas()
+    } 
+        
+    showInfo();
+}
+
+startPage();
