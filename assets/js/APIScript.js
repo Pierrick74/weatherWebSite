@@ -85,6 +85,6 @@ function getMockGameData() {
     return jsonGameDatas[0];
 }
 
-export function getGameData() {
-    return getMockGameData();
+export async function getGameData() {
+    return await getMockGameData();
 }

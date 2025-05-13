@@ -1,8 +1,8 @@
 const jsonGameDatas=[
     {
-      "name": "sunrise",
+      "title": "sunrise",
       "description": "A toi de trouver les bons soleils !",
-      "dificulté": 1,
+      "dificulty": 1,
       "pairs": 5,
       "img": [
         "https://openweathermap.org/img/wn/10d@2x.png",

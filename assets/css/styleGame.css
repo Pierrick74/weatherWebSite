@@ -1,0 +1,38 @@
+#information {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.difficultyStar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.gameDifficulty {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+    margin: 10px;
+}
+
+.deck {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+    justify-content: center;
+}
+
+.justify-center {
+    display: flex;
+    justify-content: center;
+}
