@@ -164,7 +164,8 @@ function flippedCard(index) {
 function checkRules() {
     currentFlippedIndex.sort((a, b) => a - b);
     console.log(currentFlippedIndex);
-    if(currentFlippedIndex[0] + (5*menuDifficultySelection) === currentFlippedIndex[1]) {
+    console.log(gameData);
+    if(currentFlippedIndex[0] + (gameData.pairs) === currentFlippedIndex[1]) {
         console.log("well done");
         cardDatas.find(card => card.id === currentFlippedIndex[0]).isFind = true;
 
