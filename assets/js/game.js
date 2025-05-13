@@ -12,7 +12,7 @@ const gameContainer = document.getElementById("information");
 async function startGame() {
     try {
         await getGameDatas();
-        showInfo();
+        createHeaderGame();
         createGameDatas();
         
     } catch (error) {
@@ -21,13 +21,23 @@ async function startGame() {
 }
 
 function showInfo() {
-    gameContainer.innerHTML = ""; // Clear previous content
+    gameContainer.innerHTML = "";
     
     createTitle();
 
     const gameDificulty = createDifficultyMenu();
+    gameContainer.appendChild(gameDificulty);
 
-    const gameTurn = document.createElement("p");
+    const gameTurn = document.createElement("div");
+    gameTurn.id = "headerGame"
+    gameContainer.appendChild(gameTurn);
+    createHeaderGame();
+}
+
+function createHeaderGame() {
+
+    const gameTurn = document.getElementById("headerGame");
+    gameTurn.innerHTML = "";
     const gameTurnButton = createGameButton();
     gameTurn.appendChild(gameTurnButton);
 
@@ -36,10 +46,6 @@ function showInfo() {
         gameTurnValue.textContent = "Nombre de tours : " + turnNumber;
         gameTurn.appendChild(gameTurnValue);
     }
-
-    
-    gameContainer.appendChild(gameDificulty);
-    gameContainer.appendChild(gameTurn);
 }
 
 function createTitle() {
@@ -177,7 +183,7 @@ function checkRules() {
 function incrementTurn(){
     currentFlippedIndex = [];
     turnNumber++;
-    showInfo();
+    createHeaderGame();
 }
 
 function toggleFlippedCardAtIndex(index) {
