@@ -64,7 +64,7 @@ function createTitle() {
 //---------------call api----------------
 async function getGameDatas() {
     try {
-        gameData = await getGameData();
+        gameData = await getGameData(menuDifficultySelection);
     } catch (error) {
         console.error("Error fetching game data:", error);
     }
@@ -162,9 +162,9 @@ function flippedCard(index) {
 }
 
 function checkRules() {
-    currentFlippedIndex.sort();
+    currentFlippedIndex.sort((a, b) => a - b);
     console.log(currentFlippedIndex);
-    if(currentFlippedIndex[0] + 5 === currentFlippedIndex[1]) {
+    if(currentFlippedIndex[0] + (5*menuDifficultySelection) === currentFlippedIndex[1]) {
         console.log("well done");
         cardDatas.find(card => card.id === currentFlippedIndex[0]).isFind = true;
 

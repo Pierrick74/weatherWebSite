@@ -81,10 +81,10 @@ async function fetchCityPosition(city) {
 }
 
 //----------game----------
-function getMockGameData() {
-    return jsonGameDatas[0];
+function getMockGameData(index) {
+    return jsonGameDatas[index-1];
 }
 
-export async function getGameData() {
-    return await getMockGameData();
+export async function getGameData(index) {
+    return await getMockGameData(index);
 }
