@@ -119,6 +119,9 @@ function createGameDatas() {
 }
 
 function createCardElements(index) {
+    if (index >= gameData.img.length) {
+        index = index - gameData.pairs;
+    }
     return {
         id: index,
         imageUrl: gameData.img[index],
@@ -138,11 +141,17 @@ function createCards(cardDatas) {
     gameContainer.innerHTML = ""; // Clear previous content
     cardDatas.forEach((cardData) => {
         const img = document.createElement("img");
-        img.src = "assets/img/hidden.jpg";
+        img.src = cardData.isFlipped ? cardData.imageUrl : "assets/img/hidden.jpg";
         img.alt = "card image";
         img.id = cardData.id;
         img.classList.add("card");
+        img.addEventListener("click", () => {
+            cardData.isFlipped = true;
+            turnNumber++;
+            createCards(cardDatas);
+        });
         gameContainer.appendChild(img);
     });
 }
+
 
