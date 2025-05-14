@@ -97,24 +97,25 @@ function delSelectedImg() {
 }
 
 //-----------------pub----------------
-const pubAvailable = [
-    "assets/img/pub1.png",
-    "assets/img/pub2.png",
-];
 
-function showPub() {
-    pubIndex++;
-    if (pubIndex >= pubAvailable.length) {
-        pubIndex = 0;
+const carouselItems = document.querySelectorAll(".carousel_item");
+let currentIndex = 0;
+let direction = "forward"; 
+
+setInterval(() => {
+    carouselItems.forEach((item) => {
+        item.style.transform = `translateX(-${currentIndex * 100}%)`;
+    });
+    
+    if (direction === "forward") {
+        currentIndex++;
+        if (currentIndex >= carouselItems.length - 1) {
+            direction = "backward";
+        }
+    } else {
+        currentIndex--;
+        if (currentIndex <= 0) {
+            direction = "forward";
+        }
     }
-    const pubElement = document.getElementById("pub-img");
-    pubElement.src = pubAvailable[pubIndex];
-    pubElement.alt = "pub"
-
-    setTimeout(showPub, 5000);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    showPub();
-});
-
+}, 4000);
